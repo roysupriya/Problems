@@ -1,0 +1,50 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+ 
+// Question:
+// For a given array, whether sum of all elements on the left 
+// equals sum of remaining elements on the right. If array satisfies the condition, find the index at which this occurs.
+//  Array: 1, 3, 3, 1, 6, 1. -> Array doesn't satisfy the condition
+//  Array: 1, 3, 3, 6, 1. -> Array satisfies the condition at index 2
+ 
+class SumOFLeftElementsEqualsRight
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Integer[] intArray = new Integer[5];
+		intArray[0] = 1; 
+		intArray[1] = 3;
+		intArray[2] = 3;
+		intArray[3] = 6;
+		intArray[4] = 1;
+ 
+		int sumLeft = intArray[0];
+		int sumRight = intArray[intArray.length-1];
+ 
+		for(int i=0, j=intArray.length-1; i<j ; ){
+ 
+			if(sumLeft == sumRight){
+				i++;
+				sumLeft += intArray[i];
+			} else if(sumLeft > sumRight){
+				j--;
+				sumRight += intArray[j];
+			} else if(sumLeft < sumRight){
+				i++;
+				sumLeft += intArray[i];
+			}
+ 
+			if((i == j-1)){
+				if(sumRight == sumLeft){
+					System.out.println("At index " + i + " the array satisfies the condition");
+					break;
+				}
+				else {
+					System.out.println("Array doesn't satisfy the condition");
+					break;
+				}
+			} 
+		} 
+	}
+}
